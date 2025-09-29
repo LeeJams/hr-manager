@@ -1,148 +1,185 @@
-# Flutter/Dart
-.dart_tool/
-.flutter-plugins
-.flutter-plugins-dependencies
-.packages
-build/
-**/android/**/gradle-wrapper.jar
-**/android/.gradle
-**/android/captures/
-**/android/gradlew
-**/android/gradlew.bat
-**/android/local.properties
-**/android/**/GeneratedPluginRegistrant.java
-**/android/key.properties
+# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+
+# dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn-integrity
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+.expo-shared/
+
+# Native builds
+/ios/build/
+/android/build/
+/android/app/build/
+/android/.gradle/
+/android/gradle/
+android/app/release/
+ios/build/
+*.ipa
+*.apk
+*.aab
+
+# React Native
+.react-native/
+
+# Certificates and keys
+*.orig.*
 *.jks
-**/ios/Runner/GeneratedPluginRegistrant.*
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.keystore
+google-services.json
+GoogleService-Info.plist
 
-# VS Code
-.vscode/
+# Metro
+.metro-health-check*
+.metro-cache/
 
-# IntelliJ
-*.iml
-.idea/
+# Flipper
+ios/Pods/
+android/.gradle
+android/app/src/main/assets/index.android.bundle
+android/app/src/main/assets/index.android.bundle.meta
+android/app/src/main/res/drawable-*
+android/app/src/main/res/raw/
+
+# Kotlin
+.kotlin/
 
 # Android
-**/android/app/debug
-**/android/app/profile
-**/android/app/release
-*.apk
-*.aar
-*.ap_
-*.aab
-*.dex
-*.class
-bin/
-gen/
-out/
-.gradle/
-build/
-local.properties
-proguard/
-.navigation/
-captures/
-.externalNativeBuild
-.cxx/
-*.hprof
-obj/
+android/app/release/
+android/keystores/
+android/.gradle/
+android/gradle/wrapper/gradle-wrapper.jar
+android/gradle/wrapper/gradle-wrapper.properties
+android/gradlew
+android/gradlew.bat
+android/build.gradle
+android/settings.gradle
 
 # iOS
-**/ios/**/*.mode1v3
-**/ios/**/*.mode2v3
-**/ios/**/*.moved-aside
-**/ios/**/*.pbxuser
-**/ios/**/*.perspectivev3
-**/ios/**/*sync/
-**/ios/**/.sconsign.dblite
-**/ios/**/.tags*
-**/ios/**/.vagrant/
-**/ios/**/DerivedData/
-**/ios/**/Icon?
-**/ios/**/Pods/
-**/ios/**/.symlinks/
-**/ios/**/profile
-**/ios/**/xcuserdata
-**/ios/.generated/
-**/ios/Flutter/App.framework
-**/ios/Flutter/Flutter.framework
-**/ios/Flutter/Flutter.podspec
-**/ios/Flutter/Generated.xcconfig
-**/ios/Flutter/app.flx
-**/ios/Flutter/app.zip
-**/ios/Flutter/flutter_assets/
-**/ios/Flutter/flutter_export_environment.sh
-**/ios/ServiceDefinitions.json
-**/ios/Runner/GeneratedPluginRegistrant.*
-
-# Next.js
-web/.next/
-web/out/
-web/build/
-web/dist/
-
-# Dependencies
-web/node_modules/
-**/node_modules/
+ios/Pods/
+ios/Podfile.lock
+ios/*.xcodeproj/
+ios/*.xcworkspace/
+ios/build/
+*.xcuserstate
+DerivedData/
 
 # Environment variables
-web/.env.local
-web/.env.development.local
-web/.env.test.local
-web/.env.production.local
-
-# Database
-web/*.db
-web/*.db-journal
-web/prisma/migrations/
-
-# Logs
-web/npm-debug.log*
-web/yarn-debug.log*
-web/yarn-error.log*
-*.log
-
-# Runtime data
-web/pids
-web/*.pid
-web/*.seed
-web/*.pid.lock
-
-# Coverage directory used by tools like istanbul
-web/coverage/
-
-# Misc
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+.env*.local
+
+# IDE and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+*.pem
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.nfs*
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# TypeScript
+*.tsbuildinfo
+*.d.ts.map
+
+# Testing
+coverage/
+.nyc_output/
+*.lcov
+
+# Storybook
+.storybook/dist/
+storybook-static/
 
 # Temporary files
+tmp/
+temp/
 *.tmp
 *.temp
-nul
+
+# Cache directories
+.cache/
+.parcel-cache/
+.eslintcache
 
 # Backup files
-backup_android/
+*.backup
+*.bak
 
-# Legacy files
-.classpath
-.project
-.settings/
-.mtj.tmp/
-*.war
-*.ear
-hs_err_pid*
-fastlane/
-freeline.py
-freeline/
-freeline_project_description.json
-vcs.xml
-lint/
+# Database files
+*.sqlite
+*.sqlite3
+*.db
+
+# Development tools
+.history/
+.vscode/settings.json
+
+# Project specific
+flutter_backup/
+web/node_modules/
+web/.next/
+web/out/
+web/.env.local
+web/.env.production.local
+web/.env.development.local
+web/coverage/
+
+# EAS
+.easignore
