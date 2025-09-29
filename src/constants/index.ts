@@ -4,11 +4,14 @@ export const COLORS = {
   success: '#34C759',
   warning: '#FF9500',
   error: '#FF3B30',
-  background: '#F2F2F7',
+  background: '#FFFFFF', // Updated to white background
   surface: '#FFFFFF',
-  text: '#1C1C1E',
-  textSecondary: '#8E8E93',
-  border: '#C6C6C8',
+  text: '#333333', // Updated to specified text color
+  textSecondary: '#666666', // Lighter version of main text
+  border: '#E5E5E5',
+  divider: '#F0F0F0',
+  card: '#FFFFFF',
+  shadow: 'rgba(51, 51, 51, 0.1)',
 } as const;
 
 export const FONTS = {
@@ -42,4 +45,52 @@ export const STORAGE_KEYS = {
 
 export const KAKAO_CONFIG = {
   NATIVE_APP_KEY: 'YOUR_KAKAO_NATIVE_APP_KEY', // 실제 키로 교체 필요
+} as const;
+
+export const FEATURE_FLAGS = {
+  ENABLE_TEMP_LOGIN: process.env.EXPO_PUBLIC_ENABLE_TEMP_LOGIN === 'true',
+  ENABLE_DEBUG_MODE: __DEV__,
+} as const;
+
+export const NAVIGATION = {
+  TABS: {
+    HOME: 'Home',
+    SCHEDULE: 'Schedule',
+    MY_PAGE: 'MyPage',
+  },
+  STACKS: {
+    AUTH: 'Auth',
+    MAIN: 'Main',
+    INTRO: 'Intro',
+  },
+  SCREENS: {
+    INTRO: 'IntroScreen',
+    LOGIN: 'LoginScreen',
+    SIGNUP: 'SignupScreen',
+    HOME: 'HomeScreen',
+    SCHEDULE: 'ScheduleScreen',
+    MY_PAGE: 'MyPageScreen',
+    PROFILE: 'ProfileScreen',
+    CAREER: 'CareerScreen',
+    SCHEDULE_REGISTER: 'ScheduleRegisterScreen',
+    PROJECT_DETAIL: 'ProjectDetailScreen',
+    TEAM_MANAGEMENT: 'TeamManagementScreen',
+  },
+} as const;
+
+export const THEME = {
+  colors: COLORS,
+  fonts: FONTS,
+  spacing: SPACING,
+  borderRadius: {
+    sm: 4,
+    md: 8,
+    lg: 12,
+    xl: 16,
+  },
+  hitSlop: {
+    small: { top: 8, bottom: 8, left: 8, right: 8 },
+    medium: { top: 12, bottom: 12, left: 12, right: 12 },
+    large: { top: 16, bottom: 16, left: 16, right: 16 },
+  },
 } as const;

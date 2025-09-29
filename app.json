@@ -32,6 +32,9 @@
     "plugins": [
       "expo-secure-store",
       "expo-apple-authentication",
+      "expo-notifications",
+      "expo-haptics",
+      "react-native-reanimated/plugin",
       [
         "@react-native-seoul/kakao-login",
         {

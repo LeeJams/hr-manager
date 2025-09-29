@@ -2,84 +2,208 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useAuth } from '../contexts/AuthContext';
-import { RootStackParamList } from '../types';
+import { RootStackParamList, AuthStackParamList, MainTabParamList, HomeStackParamList, MyPageStackParamList } from '../types';
+import { COLORS, NAVIGATION } from '../constants';
+import Icon from 'react-native-vector-icons/Ionicons';
 
-// Import screens (to be created)
+// Import screens
 import LoginScreen from '../screens/LoginScreen';
-import DashboardScreen from '../screens/DashboardScreen';
-import EmployeesScreen from '../screens/EmployeesScreen';
-import AttendanceScreen from '../screens/AttendanceScreen';
-import LeavesScreen from '../screens/LeavesScreen';
+import IntroScreen from '../screens/IntroScreen';
+import SignupScreen from '../screens/SignupScreen';
+import HomeScreen from '../screens/HomeScreen';
+import ScheduleScreen from '../screens/ScheduleScreen';
+import MyPageScreen from '../screens/MyPageScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import CareerScreen from '../screens/CareerScreen';
+import ScheduleRegisterScreen from '../screens/ScheduleRegisterScreen';
+import ProjectDetailScreen from '../screens/ProjectDetailScreen';
+import TeamManagementScreen from '../screens/TeamManagementScreen';
 
-const Stack = createStackNavigator<RootStackParamList>();
-const Tab = createBottomTabNavigator();
+const RootStack = createStackNavigator<RootStackParamList>();
+const AuthStack = createStackNavigator<AuthStackParamList>();
+const MainTab = createBottomTabNavigator<MainTabParamList>();
+const HomeStack = createStackNavigator<HomeStackParamList>();
+const MyPageStack = createStackNavigator<MyPageStackParamList>();
+const Drawer = createDrawerNavigator();
 
-const TabNavigator = () => {
-  return (
-    <Tab.Navigator
-      screenOptions={{
-        tabBarActiveTintColor: '#007AFF',
-        tabBarInactiveTintColor: '#8E8E93',
-        tabBarStyle: {
-          backgroundColor: '#FFFFFF',
-          borderTopColor: '#C6C6C8',
-          borderTopWidth: 1,
-        },
-        headerStyle: {
-          backgroundColor: '#007AFF',
-        },
-        headerTintColor: '#FFFFFF',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
+// Auth Stack Navigator
+const AuthNavigator = () => (
+  <AuthStack.Navigator
+    screenOptions={{
+      headerShown: false,
+    }}
+  >
+    <AuthStack.Screen name="Intro" component={IntroScreen} />
+    <AuthStack.Screen name="Login" component={LoginScreen} />
+    <AuthStack.Screen name="Signup" component={SignupScreen} />
+  </AuthStack.Navigator>
+);
+
+// Home Stack Navigator with Drawer
+const HomeStackNavigator = () => (
+  <HomeStack.Navigator
+    screenOptions={{
+      headerStyle: {
+        backgroundColor: COLORS.background,
+      },
+      headerTintColor: COLORS.text,
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        color: COLORS.text,
+      },
+    }}
+  >
+    <HomeStack.Screen
+      name="HomeScreen"
+      component={HomeScreen}
+      options={({ navigation }) => ({
+        title: '홈',
+        headerLeft: () => (
+          <Icon
+            name="menu-outline"
+            size={24}
+            color={COLORS.text}
+            style={{ marginLeft: 16 }}
+            onPress={() => (navigation as any).openDrawer()}
+          />
+        ),
+      })}
+    />
+    <HomeStack.Screen
+      name="ProjectDetail"
+      component={ProjectDetailScreen}
+      options={{ title: '프로젝트 상세' }}
+    />
+    <HomeStack.Screen
+      name="TeamManagement"
+      component={TeamManagementScreen}
+      options={{ title: '팀 관리' }}
+    />
+  </HomeStack.Navigator>
+);
+
+// Home with Drawer Navigator
+const HomeWithDrawer = () => (
+  <Drawer.Navigator
+    screenOptions={{
+      headerShown: false,
+      drawerStyle: {
+        backgroundColor: COLORS.background,
+        width: 280,
+      },
+      drawerActiveTintColor: COLORS.primary,
+      drawerInactiveTintColor: COLORS.textSecondary,
+    }}
+  >
+    <Drawer.Screen
+      name="HomeStack"
+      component={HomeStackNavigator}
+      options={{
+        drawerLabel: '홈',
+        drawerIcon: ({ color }) => <Icon name="home-outline" size={20} color={color} />,
       }}
-    >
-      <Tab.Screen
-        name="Dashboard"
-        component={DashboardScreen}
-        options={{
-          title: '대시보드',
-          tabBarLabel: '홈',
-        }}
-      />
-      <Tab.Screen
-        name="Employees"
-        component={EmployeesScreen}
-        options={{
-          title: '직원 관리',
-          tabBarLabel: '직원',
-        }}
-      />
-      <Tab.Screen
-        name="Attendance"
-        component={AttendanceScreen}
-        options={{
-          title: '출퇴근 관리',
-          tabBarLabel: '출퇴근',
-        }}
-      />
-      <Tab.Screen
-        name="Leaves"
-        component={LeavesScreen}
-        options={{
-          title: '휴가 관리',
-          tabBarLabel: '휴가',
-        }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{
-          title: '프로필',
-          tabBarLabel: '내 정보',
-        }}
-      />
-    </Tab.Navigator>
-  );
-};
+    />
+  </Drawer.Navigator>
+);
 
+// MyPage Stack Navigator
+const MyPageStackNavigator = () => (
+  <MyPageStack.Navigator
+    screenOptions={{
+      headerStyle: {
+        backgroundColor: COLORS.background,
+      },
+      headerTintColor: COLORS.text,
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        color: COLORS.text,
+      },
+    }}
+  >
+    <MyPageStack.Screen
+      name="MyPageScreen"
+      component={MyPageScreen}
+      options={{ title: '마이페이지' }}
+    />
+    <MyPageStack.Screen
+      name="Profile"
+      component={ProfileScreen}
+      options={{ title: '내 정보' }}
+    />
+    <MyPageStack.Screen
+      name="Career"
+      component={CareerScreen}
+      options={{ title: '내 경력' }}
+    />
+    <MyPageStack.Screen
+      name="ScheduleRegister"
+      component={ScheduleRegisterScreen}
+      options={{ title: '일정 등록' }}
+    />
+  </MyPageStack.Navigator>
+);
+
+// Main Tab Navigator
+const MainTabNavigator = () => (
+  <MainTab.Navigator
+    screenOptions={({ route }) => ({
+      tabBarIcon: ({ focused, color, size }) => {
+        let iconName: string;
+
+        switch (route.name) {
+          case NAVIGATION.TABS.HOME:
+            iconName = focused ? 'home' : 'home-outline';
+            break;
+          case NAVIGATION.TABS.SCHEDULE:
+            iconName = focused ? 'calendar' : 'calendar-outline';
+            break;
+          case NAVIGATION.TABS.MY_PAGE:
+            iconName = focused ? 'person' : 'person-outline';
+            break;
+          default:
+            iconName = 'help-outline';
+        }
+
+        return <Icon name={iconName} size={size} color={color} />;
+      },
+      tabBarActiveTintColor: COLORS.primary,
+      tabBarInactiveTintColor: COLORS.textSecondary,
+      tabBarStyle: {
+        backgroundColor: COLORS.background,
+        borderTopColor: COLORS.border,
+        borderTopWidth: 1,
+        paddingBottom: 8,
+        paddingTop: 8,
+        height: 60,
+      },
+      tabBarLabelStyle: {
+        fontSize: 12,
+        fontWeight: '500',
+      },
+      headerShown: false,
+    })}
+  >
+    <MainTab.Screen
+      name={NAVIGATION.TABS.HOME}
+      component={HomeWithDrawer}
+      options={{ tabBarLabel: '홈' }}
+    />
+    <MainTab.Screen
+      name={NAVIGATION.TABS.SCHEDULE}
+      component={ScheduleScreen}
+      options={{ tabBarLabel: '일정관리' }}
+    />
+    <MainTab.Screen
+      name={NAVIGATION.TABS.MY_PAGE}
+      component={MyPageStackNavigator}
+      options={{ tabBarLabel: '마이페이지' }}
+    />
+  </MainTab.Navigator>
+);
+
+// Root App Navigator
 const AppNavigator: React.FC = () => {
   const { isAuthenticated, isLoading } = useAuth();
 
@@ -90,13 +214,17 @@ const AppNavigator: React.FC = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <RootStack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
         {!isAuthenticated ? (
-          <Stack.Screen name="Login" component={LoginScreen} />
+          <RootStack.Screen name="Auth" component={AuthNavigator} />
         ) : (
-          <Stack.Screen name="Main" component={TabNavigator} />
+          <RootStack.Screen name="Main" component={MainTabNavigator} />
         )}
-      </Stack.Navigator>
+      </RootStack.Navigator>
     </NavigationContainer>
   );
 };
