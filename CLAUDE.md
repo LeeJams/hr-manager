@@ -23,6 +23,15 @@ npm run type-check       # TypeScript type checking
 npm run lint             # ESLint code linting
 ```
 
+### **⚠️ REQUIRED: Pre-Commit Checklist**
+**ALWAYS run these 3 commands after making code changes:**
+```bash
+npm run type-check       # 1. Type checking
+npm run lint             # 2. Linting (if configured)
+npm run build            # 3. Production build test
+```
+If any of these fail, fix the errors before committing.
+
 ### Blue-Green Deployment
 ```bash
 npm run deploy:blue      # Build for blue environment (port 3000)
@@ -113,3 +122,7 @@ Optional deployment variables:
 5. **Image Optimization**: Next.js config enables AVIF and WebP formats. Use Next.js `<Image>` component for all images.
 
 6. **Package Optimization**: `@tanstack/react-query` and `zustand` are configured for optimized imports in `next.config.ts`.
+
+7. **Enum Imports**: When using TypeScript enums as values (not just types), import them without `import type`. Use `import { EnumName }` instead of `import type { EnumName }` to avoid "cannot be used as a value" errors.
+
+8. **Freelancer Project Management**: This system is for freelancer project management. DO NOT implement attendance tracking features (clock-in/clock-out, vacation requests) as they are not needed for freelancers.
