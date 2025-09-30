@@ -4,10 +4,17 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:local": "NODE_ENV=development next dev",
     "build": "next build",
+    "build:local": "NODE_ENV=development next build",
+    "build:prod": "NODE_ENV=production next build",
     "start": "next start",
+    "start:prod": "NODE_ENV=production next start",
     "lint": "next lint",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "deploy:blue": "NODE_ENV=production DEPLOYMENT_ENV=blue next build",
+    "deploy:green": "NODE_ENV=production DEPLOYMENT_ENV=green next build",
+    "health-check": "node scripts/health-check.js"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.90.2",

@@ -24,7 +24,11 @@ yarn-error.log*
 
 # local env files
 .env
+.env.local
 .env*.local
+
+# production env (tracked in git for deployment)
+# .env.production is tracked
 
 # vercel
 .vercel
