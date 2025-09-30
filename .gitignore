@@ -1,175 +1,40 @@
-# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
-
 # dependencies
-node_modules/
-.npm
-.yarn-integrity
+/node_modules
+/.pnp
+.pnp.js
 
-# Expo
-.expo/
-dist/
-web-build/
-expo-env.d.ts
-.expo-shared/
+# testing
+/coverage
 
-# Native builds
-*.ipa
-*.apk
-*.aab
+# next.js
+/.next/
+/out/
 
-# React Native
-.react-native/
+# production
+/build
 
-# Certificates and keys
-*.orig.*
-*.jks
-*.p8
-*.p12
-*.key
-*.mobileprovision
-*.keystore
-google-services.json
-GoogleService-Info.plist
-
-# Metro
-.metro-health-check*
-.metro-cache/
-
-# Flipper
-android/app/src/main/assets/index.android.bundle
-android/app/src/main/assets/index.android.bundle.meta
-android/app/src/main/res/drawable-*
-android/app/src/main/res/raw/
-
-# Kotlin
-.kotlin/
-
-# Android
-/android/build/
-/android/app/build/
-/android/.gradle/
-/android/gradle/
-android/app/release/
-android/keystores/
-android/gradle/wrapper/gradle-wrapper.jar
-android/gradle/wrapper/gradle-wrapper.properties
-android/gradlew
-android/gradlew.bat
-android/build.gradle
-android/settings.gradle
-
-# iOS
-/ios/build/
-ios/Pods/
-ios/Podfile.lock
-ios/*.xcodeproj/
-ios/*.xcworkspace/
-*.xcuserstate
-DerivedData/
-
-# Environment variables
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-.env*.local
-
-# IDE and editors
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# macOS
+# misc
 .DS_Store
-.AppleDouble
-.LSOverride
-Icon
-._*
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-.com.apple.timemachine.donotpresent
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
 *.pem
 
-# Windows
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-$RECYCLE.BIN/
-*.cab
-*.msi
-*.msm
-*.msp
-*.lnk
-
-# Linux
-.nfs*
-
-# Logs
-logs
-*.log
+# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-lerna-debug.log*
 
-# TypeScript
+# local env files
+.env
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
 *.tsbuildinfo
-*.d.ts.map
+next-env.d.ts
 
-# Testing
-coverage/
-.nyc_output/
-*.lcov
-
-# Storybook
-.storybook/dist/
-storybook-static/
-
-# Temporary files
-tmp/
-temp/
-*.tmp
-*.temp
-
-# Cache directories
-.cache/
-.parcel-cache/
-.eslintcache
-
-# Backup files
-*.backup
-*.bak
-
-# Database files
-*.sqlite
-*.sqlite3
-*.db
-
-# Development tools
-.history/
-.vscode/settings.json
-
-# Project specific
-flutter_backup/
-web/node_modules/
-web/.next/
-web/out/
-web/.env.local
-web/.env.production.local
-web/.env.development.local
-web/coverage/
-
-# EAS
-.easignore
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
