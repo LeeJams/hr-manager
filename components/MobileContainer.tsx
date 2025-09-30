@@ -7,8 +7,15 @@ interface MobileContainerProps {
 
 export default function MobileContainer({ children, className = '' }: MobileContainerProps) {
   return (
-    <div className="min-h-screen bg-[#FFFFFF] flex justify-center">
-      <div className={`w-full max-w-[480px] md:max-w-[768px] bg-white min-h-screen shadow-2xl md:shadow-none border-l border-r border-gray-200 md:border-0 relative ${className}`}>
+    <div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 flex justify-center">
+      <div
+        className={`
+          w-full max-w-[480px] md:max-w-[768px]
+          bg-white min-h-screen
+          shadow-xl rounded-md   /* 모서리 라운딩으로 더 부드럽게 */
+          relative ${className}
+        `}
+      >
         {children}
       </div>
     </div>
