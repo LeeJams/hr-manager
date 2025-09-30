@@ -1,91 +1,153 @@
 'use client'
 
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import BottomNav from '@/components/BottomNav'
 import MobileContainer from '@/components/MobileContainer'
+import UserStatusCard from '@/components/home/UserStatusCard'
+import ProjectSection from '@/components/home/ProjectSection'
+import NoticeSection from '@/components/home/NoticeSection'
+import { UserStatus } from '@/types/user'
+import type { Project } from '@/types/project'
+import type { Notice } from '@/types/notice'
 
 export default function HomePage() {
+  // TODO: API 연동 후 실제 데이터로 교체
+  const [userName, setUserName] = useState('테크밋')
+  const [userStatus] = useState(UserStatus.DEPLOYED)
+  const [career] = useState({
+    years: 3,
+    months: 6,
+    startDate: '2021-06-01',
+  })
+
+  // Mock 프로젝트 데이터 (최대 3개)
+  const [projects, setProjects] = useState<Project[]>([])
+
+  // Mock 공지사항 데이터
+  const [notices, setNotices] = useState<Notice[]>([])
+
+  // TODO: 실제 API 호출로 교체
+  useEffect(() => {
+    // Mock 데이터 설정
+    const mockProjects: Project[] = [
+      {
+        id: '1',
+        name: 'HR 관리 시스템 개선',
+        description: '차세대 HR 관리 시스템 개발 프로젝트',
+        status: 'IN_PROGRESS' as any,
+        progress: 65,
+        startDate: '2025-01-01',
+        endDate: '2025-06-30',
+        team: [
+          { id: '1', name: '김철수', role: '개발자' },
+          { id: '2', name: '박민수', role: '디자이너' },
+          { id: '3', name: '정수진', role: 'PM' },
+        ],
+        createdAt: '2025-01-01',
+        updatedAt: '2025-01-15',
+      },
+      {
+        id: '2',
+        name: '모바일 앱 개발',
+        description: 'iOS/Android 모바일 애플리케이션 개발',
+        status: 'IN_PROGRESS' as any,
+        progress: 40,
+        startDate: '2025-02-01',
+        endDate: '2025-08-31',
+        team: [
+          { id: '4', name: '이영희', role: '개발자' },
+          { id: '5', name: '최지훈', role: '개발자' },
+        ],
+        createdAt: '2025-02-01',
+        updatedAt: '2025-02-15',
+      },
+      {
+        id: '3',
+        name: 'API 서버 고도화',
+        description: '백엔드 API 성능 최적화 및 기능 확장',
+        status: 'PLANNING' as any,
+        progress: 20,
+        startDate: '2025-03-01',
+        endDate: '2025-05-31',
+        team: [
+          { id: '6', name: '김개발', role: '백엔드 개발자' },
+        ],
+        createdAt: '2025-02-20',
+        updatedAt: '2025-02-25',
+      },
+    ]
+
+    const mockNotices: Notice[] = [
+      {
+        id: '1',
+        title: '2025년 상반기 워크샵 안내',
+        content: '워크샵 내용...',
+        type: 'EVENT' as any,
+        author: { id: '1', name: '관리자', role: '운영팀' },
+        createdAt: '2025-01-15',
+        views: 125,
+        isImportant: true,
+      },
+      {
+        id: '2',
+        title: '신규 복지 제도 시행 안내',
+        content: '복지 내용...',
+        type: 'POLICY' as any,
+        author: { id: '1', name: '관리자', role: '인사팀' },
+        createdAt: '2025-01-10',
+        views: 89,
+        isImportant: false,
+      },
+      {
+        id: '3',
+        title: '보안 정책 업데이트',
+        content: '보안 내용...',
+        type: 'SYSTEM' as any,
+        author: { id: '2', name: '시스템관리자', role: '보안팀' },
+        createdAt: '2025-01-05',
+        views: 203,
+        isImportant: false,
+      },
+    ]
+
+    setProjects(mockProjects)
+    setNotices(mockNotices)
+  }, [])
+
   return (
     <MobileContainer>
       <div className="min-h-screen bg-light pb-16">
-      {/* 헤더 */}
-      <header className="bg-dark text-light px-6 py-4">
-        <h1 className="text-xl font-bold">TechMeet</h1>
-      </header>
+        {/* 헤더 */}
+        <header className="bg-dark text-light px-6 py-4">
+          <Link href="/home">
+            <h1 className="text-xl font-bold cursor-pointer">TechMeet</h1>
+          </Link>
+        </header>
 
-      {/* 메인 컨텐츠 */}
-      <main className="p-6">
-        <div className="mb-6">
-          <h2 className="text-2xl font-bold text-dark mb-2">안녕하세요!</h2>
-          <p className="text-gray-600">오늘도 좋은 하루 되세요</p>
-        </div>
-
-        {/* 빠른 액션 카드 */}
-        <div className="grid grid-cols-2 gap-4 mb-6">
-          <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-            <div className="w-12 h-12 bg-dark rounded-full flex items-center justify-center mb-3">
-              <svg className="w-6 h-6 text-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <h3 className="font-medium text-dark mb-1">출근하기</h3>
-            <p className="text-xs text-gray-500">근태 기록</p>
+        {/* 메인 컨텐츠 */}
+        <main className="px-5 py-8">
+          {/* 인사말 */}
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold text-dark mb-2">
+              안녕하세요 {userName}님,
+            </h2>
+            <p className="text-gray-600">오늘도 좋은 하루되세요</p>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-            <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mb-3">
-              <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-            </div>
-            <h3 className="font-medium text-dark mb-1">휴가 신청</h3>
-            <p className="text-xs text-gray-500">연차 관리</p>
-          </div>
-        </div>
+          {/* 나의 상태 카드 */}
+          <UserStatusCard status={userStatus} career={career} />
 
-        {/* 최근 공지사항 */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
-          <h3 className="font-semibold text-dark mb-4">공지사항</h3>
-          <div className="space-y-3">
-            <div className="pb-3 border-b border-gray-100">
-              <p className="text-sm text-dark mb-1">2025년 상반기 워크샵 안내</p>
-              <p className="text-xs text-gray-500">2025.01.15</p>
-            </div>
-            <div className="pb-3 border-b border-gray-100">
-              <p className="text-sm text-dark mb-1">신규 복지 제도 시행 안내</p>
-              <p className="text-xs text-gray-500">2025.01.10</p>
-            </div>
-            <div>
-              <p className="text-sm text-dark mb-1">보안 정책 업데이트</p>
-              <p className="text-xs text-gray-500">2025.01.05</p>
-            </div>
-          </div>
-        </div>
+          {/* 프로젝트 정보 섹션 */}
+          <ProjectSection projects={projects} />
 
-        {/* 이번 주 일정 */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <h3 className="font-semibold text-dark mb-4">이번 주 일정</h3>
-          <div className="space-y-3">
-            <div className="flex items-start gap-3">
-              <div className="w-2 h-2 bg-dark rounded-full mt-2"></div>
-              <div className="flex-1">
-                <p className="text-sm text-dark mb-1">프로젝트 킥오프 미팅</p>
-                <p className="text-xs text-gray-500">2025.01.20 14:00</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-2 h-2 bg-gray-400 rounded-full mt-2"></div>
-              <div className="flex-1">
-                <p className="text-sm text-dark mb-1">주간 회의</p>
-                <p className="text-xs text-gray-500">2025.01.22 10:00</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
+          {/* 공지사항 섹션 */}
+          <NoticeSection notices={notices} />
+        </main>
 
-      {/* 하단 네비게이션 */}
-      <BottomNav />
-    </div>
+        {/* 하단 네비게이션 */}
+        <BottomNav />
+      </div>
     </MobileContainer>
   )
 }

@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import BottomNav from '@/components/BottomNav'
 import MobileContainer from '@/components/MobileContainer'
 
@@ -47,7 +48,9 @@ export default function ProjectsPage() {
       <div className="min-h-screen bg-light pb-16">
       {/* 헤더 */}
       <header className="bg-dark text-light px-6 py-4">
-        <h1 className="text-xl font-bold">프로젝트</h1>
+        <Link href="/home">
+          <h1 className="text-xl font-bold cursor-pointer">TechMeet</h1>
+        </Link>
       </header>
 
       {/* 프로젝트 필터 */}
