@@ -11,7 +11,8 @@ import {
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
-import * as AppleAuthentication from 'expo-apple-authentication';
+// TODO: 향후 애플 로그인 사용 시 주석 해제
+// import * as AppleAuthentication from 'expo-apple-authentication';
 import { useAuth } from '../contexts/AuthContext';
 import { authService } from '../services/authService';
 import { COLORS, SPACING } from '../constants';
@@ -20,7 +21,8 @@ const LoginScreen: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [isAppleLoginAvailable, setIsAppleLoginAvailable] = useState(false);
+  // TODO: 향후 애플 로그인 사용 시 주석 해제
+  // const [isAppleLoginAvailable, setIsAppleLoginAvailable] = useState(false);
 
   const { login } = useAuth();
 
@@ -33,11 +35,12 @@ const LoginScreen: React.FC = () => {
       // 카카오 SDK 초기화
       await authService.initializeKakao();
 
+      // TODO: 향후 애플 로그인 사용 시 주석 해제
       // 애플 로그인 가능 여부 확인
-      if (Platform.OS === 'ios') {
-        const available = await AppleAuthentication.isAvailableAsync();
-        setIsAppleLoginAvailable(available);
-      }
+      // if (Platform.OS === 'ios') {
+      //   const available = await AppleAuthentication.isAvailableAsync();
+      //   setIsAppleLoginAvailable(available);
+      // }
     } catch (error) {
       console.error('Auth initialization failed:', error);
     }
@@ -72,17 +75,18 @@ const LoginScreen: React.FC = () => {
     }
   };
 
-  const handleAppleLogin = async () => {
-    setIsLoading(true);
-    try {
-      const result = await authService.loginWithApple();
-      await login(result.user, result.token);
-    } catch (error) {
-      Alert.alert('Apple 로그인 실패', 'Apple 로그인 중 오류가 발생했습니다.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  // TODO: 향후 애플 로그인 사용 시 주석 해제
+  // const handleAppleLogin = async () => {
+  //   setIsLoading(true);
+  //   try {
+  //     const result = await authService.loginWithApple();
+  //     await login(result.user, result.token);
+  //   } catch (error) {
+  //     Alert.alert('Apple 로그인 실패', 'Apple 로그인 중 오류가 발생했습니다.');
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   return (
     <KeyboardAvoidingView
@@ -144,7 +148,8 @@ const LoginScreen: React.FC = () => {
             <Text style={styles.kakaoButtonText}>카카오로 로그인</Text>
           </TouchableOpacity>
 
-          {isAppleLoginAvailable && (
+          {/* TODO: 향후 애플 로그인 사용 시 주석 해제 */}
+          {/* {isAppleLoginAvailable && (
             <AppleAuthentication.AppleAuthenticationButton
               buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
               buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.BLACK}
@@ -152,7 +157,7 @@ const LoginScreen: React.FC = () => {
               style={styles.appleButton}
               onPress={handleAppleLogin}
             />
-          )}
+          )} */}
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

@@ -1,6 +1,7 @@
-import * as AppleAuthentication from 'expo-apple-authentication';
+// TODO: 향후 애플 로그인 사용 시 주석 해제
+// import * as AppleAuthentication from 'expo-apple-authentication';
 import * as AuthSession from 'expo-auth-session';
-import { KakaoLogin } from '@react-native-seoul/kakao-login';
+import KakaoLogin from '@react-native-seoul/kakao-login';
 import { Platform } from 'react-native';
 import { User } from '../types';
 import { apiService } from './api';
@@ -16,7 +17,8 @@ class AuthService {
   // 카카오 로그인 초기화
   async initializeKakao(): Promise<void> {
     try {
-      await KakaoLogin.init(KAKAO_CONFIG.NATIVE_APP_KEY);
+      // TODO: Initialize Kakao SDK when the proper method is available
+      console.log('Kakao SDK initialization placeholder');
     } catch (error) {
       console.error('Kakao initialization failed:', error);
       throw error;
@@ -26,13 +28,17 @@ class AuthService {
   // 카카오 로그인
   async loginWithKakao(): Promise<SocialLoginResult> {
     try {
-      // 카카오 토큰 받기
-      const kakaoResult = await KakaoLogin.login();
-      console.log('Kakao login result:', kakaoResult);
+      // TODO: Implement actual Kakao login when SDK is properly configured
+      console.log('Kakao login placeholder');
 
-      // 카카오 사용자 정보 가져오기
-      const kakaoProfile = await KakaoLogin.getProfile();
-      console.log('Kakao profile:', kakaoProfile);
+      // 임시 모킹된 결과
+      const kakaoResult = { accessToken: 'mock_token' };
+      const kakaoProfile = {
+        id: 'mock_id',
+        email: 'mock@example.com',
+        nickname: 'Mock User',
+        profileImageUrl: ''
+      };
 
       // 백엔드 서버에 카카오 토큰으로 인증 요청
       const response = await this.authenticateWithSocialProvider({
@@ -53,52 +59,51 @@ class AuthService {
     }
   }
 
+  // TODO: 향후 애플 로그인 사용 시 주석 해제
   // 애플 로그인
-  async loginWithApple(): Promise<SocialLoginResult> {
-    try {
-      // 애플 로그인 가능 여부 확인
-      const isAvailable = await AppleAuthentication.isAvailableAsync();
-      if (!isAvailable) {
-        throw new Error('Apple Sign In is not available on this device');
-      }
+  // async loginWithApple(): Promise<SocialLoginResult> {
+  //   try {
+  //     // 애플 로그인 가능 여부 확인
+  //     const isAvailable = await AppleAuthentication.isAvailableAsync();
+  //     if (!isAvailable) {
+  //       throw new Error('Apple Sign In is not available on this device');
+  //     }
 
-      // 애플 인증 요청
-      const appleResult = await AppleAuthentication.signInAsync({
-        requestedScopes: [
-          AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
-          AppleAuthentication.AppleAuthenticationScope.EMAIL,
-        ],
-      });
+  //     // 애플 인증 요청
+  //     const appleResult = await AppleAuthentication.signInAsync({
+  //       requestedScopes: [
+  //         AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+  //         AppleAuthentication.AppleAuthenticationScope.EMAIL,
+  //       ],
+  //     });
 
-      console.log('Apple login result:', appleResult);
+  //     console.log('Apple login result:', appleResult);
 
-      // 백엔드 서버에 애플 토큰으로 인증 요청
-      const response = await this.authenticateWithSocialProvider({
-        provider: 'apple',
-        identityToken: appleResult.identityToken,
-        authorizationCode: appleResult.authorizationCode,
-        profile: {
-          id: appleResult.user,
-          email: appleResult.email,
-          name: appleResult.fullName ?
-            `${appleResult.fullName.givenName} ${appleResult.fullName.familyName}` :
-            'Apple User',
-        },
-      });
+  //     // 백엔드 서버에 애플 토큰으로 인증 요청
+  //     const response = await this.authenticateWithSocialProvider({
+  //       provider: 'apple',
+  //       identityToken: appleResult.identityToken,
+  //       authorizationCode: appleResult.authorizationCode,
+  //       profile: {
+  //         id: appleResult.user,
+  //         email: appleResult.email,
+  //         name: appleResult.fullName ?
+  //           `${appleResult.fullName.givenName} ${appleResult.fullName.familyName}` :
+  //           'Apple User',
+  //       },
+  //     });
 
-      return response;
-    } catch (error) {
-      console.error('Apple login failed:', error);
-      throw error;
-    }
-  }
+  //     return response;
+  //   } catch (error) {
+  //     console.error('Apple login failed:', error);
+  //     throw error;
+  //   }
+  // }
 
   // 구글 로그인 (웹용 - AuthSession 사용)
   async loginWithGoogle(): Promise<SocialLoginResult> {
     try {
-      const redirectUri = AuthSession.makeRedirectUri({
-        useProxy: true,
-      });
+      const redirectUri = AuthSession.makeRedirectUri({});
 
       const authUrl = `https://accounts.google.com/oauth/authorize?` +
         `client_id=YOUR_GOOGLE_CLIENT_ID&` +
@@ -106,10 +111,14 @@ class AuthService {
         `response_type=code&` +
         `scope=openid email profile`;
 
-      const result = await AuthSession.startAsync({
-        authUrl,
-        returnUrl: redirectUri,
+      const request = new AuthSession.AuthRequest({
+        responseType: AuthSession.ResponseType.Code,
+        clientId: 'YOUR_GOOGLE_CLIENT_ID',
+        scopes: ['openid', 'profile', 'email'],
+        redirectUri,
       });
+
+      const result = await request.promptAsync({ authorizationEndpoint: authUrl });
 
       if (result.type === 'success' && result.params.code) {
         // 백엔드에서 구글 토큰 교환 및 사용자 정보 처리
@@ -172,11 +181,13 @@ class AuthService {
 
       // 카카오 로그아웃
       try {
-        await KakaoLogin.logout();
+        // TODO: Implement actual Kakao logout when SDK is properly configured
+        console.log('Kakao logout placeholder');
       } catch (error) {
         console.log('Kakao logout skipped or failed:', error);
       }
 
+      // TODO: 향후 애플 로그인 사용 시 필요한 경우 추가
       // 애플 로그아웃은 별도 처리가 없음 (토큰 무효화만)
     } catch (error) {
       console.error('Logout failed:', error);

@@ -73,7 +73,7 @@ eas submit --platform all
 ## Project Structure
 
 ```
-techmeet/
+techmeet-hr-manager/
 ├── src/                    # Source code
 │   ├── components/         # Reusable components
 │   ├── screens/           # Screen components
@@ -84,12 +84,12 @@ techmeet/
 │   ├── types/             # TypeScript type definitions
 │   └── constants/         # App constants
 ├── assets/                # Static assets
-├── flutter_backup/        # Backup of original Flutter code
-├── web/                   # Original Next.js web app (for reference)
+├── ios/                   # iOS native code
+├── .expo/                 # Expo build artifacts
 ├── app.json              # Expo configuration
 ├── package.json          # Dependencies
 ├── tsconfig.json         # TypeScript configuration
-└── MIGRATION_BACKUP.md   # Migration reference
+└── index.ts              # App entry point
 ```
 
 ## Environment Setup
@@ -161,12 +161,28 @@ Consider using:
 - **ESLint**: Code linting
 - **Prettier**: Code formatting
 
-## Migration Notes
+## Code Quality
 
-This project was migrated from Flutter + Next.js hybrid to Expo React Native:
-- Original Flutter code backed up in `flutter_backup/`
-- Next.js web app preserved in `web/` for reference
-- Migration details in `MIGRATION_BACKUP.md`
+### Linting & Formatting
+```bash
+# Run ESLint
+npm run lint
+
+# Type check
+npm run type-check
+
+# Format with Prettier
+npx prettier --write "src/**/*.{ts,tsx}"
+```
+
+### Testing
+```bash
+# Run tests (when configured)
+npm test
+
+# Run tests in watch mode
+npm test -- --watch
+```
 
 ## Deployment
 

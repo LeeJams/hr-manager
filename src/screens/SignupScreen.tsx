@@ -92,16 +92,19 @@ const SignupScreen: React.FC = () => {
                 minLength: { value: 2, message: '이름은 2글자 이상이어야 합니다' },
               }}
               render={({ field: { onChange, onBlur, value } }) => (
-                <TextInput
-                  placeholder="이름"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  errorMessage={errors.name?.message}
-                  containerStyle={styles.inputContainer}
-                  inputStyle={styles.input}
-                  leftIcon={<Icon name="person-outline" size={20} color={COLORS.textSecondary} />}
-                />
+                <View style={styles.inputWrapper}>
+                  <View style={styles.inputContainer}>
+                    <Icon name="person-outline" size={20} color={COLORS.textSecondary} style={styles.inputIcon} />
+                    <TextInput
+                      placeholder="이름"
+                      onBlur={onBlur}
+                      onChangeText={onChange}
+                      value={value}
+                      style={styles.input}
+                    />
+                  </View>
+                  {errors.name && <Text style={styles.errorText}>{errors.name.message}</Text>}
+                </View>
               )}
             />
 
@@ -116,18 +119,21 @@ const SignupScreen: React.FC = () => {
                 },
               }}
               render={({ field: { onChange, onBlur, value } }) => (
-                <TextInput
-                  placeholder="이메일"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  keyboardType="email-address"
-                  autoCapitalize="none"
-                  errorMessage={errors.email?.message}
-                  containerStyle={styles.inputContainer}
-                  inputStyle={styles.input}
-                  leftIcon={<Icon name="mail-outline" size={20} color={COLORS.textSecondary} />}
-                />
+                <View style={styles.inputWrapper}>
+                  <View style={styles.inputContainer}>
+                    <Icon name="mail-outline" size={20} color={COLORS.textSecondary} style={styles.inputIcon} />
+                    <TextInput
+                      placeholder="이메일"
+                      onBlur={onBlur}
+                      onChangeText={onChange}
+                      value={value}
+                      keyboardType="email-address"
+                      autoCapitalize="none"
+                      style={styles.input}
+                    />
+                  </View>
+                  {errors.email && <Text style={styles.errorText}>{errors.email.message}</Text>}
+                </View>
               )}
             />
 
@@ -139,17 +145,20 @@ const SignupScreen: React.FC = () => {
                 minLength: { value: 6, message: '비밀번호는 6글자 이상이어야 합니다' },
               }}
               render={({ field: { onChange, onBlur, value } }) => (
-                <TextInput
-                  placeholder="비밀번호"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  secureTextEntry
-                  errorMessage={errors.password?.message}
-                  containerStyle={styles.inputContainer}
-                  inputStyle={styles.input}
-                  leftIcon={<Icon name="lock-closed-outline" size={20} color={COLORS.textSecondary} />}
-                />
+                <View style={styles.inputWrapper}>
+                  <View style={styles.inputContainer}>
+                    <Icon name="lock-closed-outline" size={20} color={COLORS.textSecondary} style={styles.inputIcon} />
+                    <TextInput
+                      placeholder="비밀번호"
+                      onBlur={onBlur}
+                      onChangeText={onChange}
+                      value={value}
+                      secureTextEntry
+                      style={styles.input}
+                    />
+                  </View>
+                  {errors.password && <Text style={styles.errorText}>{errors.password.message}</Text>}
+                </View>
               )}
             />
 
@@ -161,17 +170,20 @@ const SignupScreen: React.FC = () => {
                 validate: (value) => value === password || '비밀번호가 일치하지 않습니다',
               }}
               render={({ field: { onChange, onBlur, value } }) => (
-                <TextInput
-                  placeholder="비밀번호 확인"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  secureTextEntry
-                  errorMessage={errors.confirmPassword?.message}
-                  containerStyle={styles.inputContainer}
-                  inputStyle={styles.input}
-                  leftIcon={<Icon name="lock-closed-outline" size={20} color={COLORS.textSecondary} />}
-                />
+                <View style={styles.inputWrapper}>
+                  <View style={styles.inputContainer}>
+                    <Icon name="lock-closed-outline" size={20} color={COLORS.textSecondary} style={styles.inputIcon} />
+                    <TextInput
+                      placeholder="비밀번호 확인"
+                      onBlur={onBlur}
+                      onChangeText={onChange}
+                      value={value}
+                      secureTextEntry
+                      style={styles.input}
+                    />
+                  </View>
+                  {errors.confirmPassword && <Text style={styles.errorText}>{errors.confirmPassword.message}</Text>}
+                </View>
               )}
             />
 
@@ -257,12 +269,33 @@ const styles = StyleSheet.create({
     paddingHorizontal: THEME.spacing.lg,
     paddingBottom: THEME.spacing.xl,
   },
-  inputContainer: {
+  inputWrapper: {
     marginBottom: THEME.spacing.md,
   },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: COLORS.surface,
+    borderRadius: THEME.borderRadius.md,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    paddingHorizontal: THEME.spacing.md,
+    paddingVertical: THEME.spacing.sm,
+  },
+  inputIcon: {
+    marginRight: THEME.spacing.sm,
+  },
   input: {
+    flex: 1,
     color: COLORS.text,
     fontSize: 16,
+    paddingVertical: THEME.spacing.sm,
+  },
+  errorText: {
+    fontSize: 12,
+    color: COLORS.error,
+    marginTop: 4,
+    paddingHorizontal: 4,
   },
   signupButton: {
     backgroundColor: COLORS.primary,

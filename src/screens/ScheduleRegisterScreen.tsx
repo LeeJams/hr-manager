@@ -126,14 +126,16 @@ const ScheduleRegisterScreen: React.FC = () => {
             name="title"
             rules={{ required: '제목을 입력해주세요' }}
             render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                placeholder="일정 제목"
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                style={styles.input}
-              />
-              {errors.title && <Text style={styles.errorText}>{errors.title.message}</Text>}
+              <>
+                <TextInput
+                  placeholder="일정 제목"
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  style={styles.input}
+                />
+                {errors.title && <Text style={styles.errorText}>{errors.title.message}</Text>}
+              </>
             )}
           />
 
@@ -143,15 +145,17 @@ const ScheduleRegisterScreen: React.FC = () => {
               name="startTime"
               rules={{ required: '시작 시간을 입력해주세요' }}
               render={({ field: { onChange, onBlur, value } }) => (
-                <TextInput
-                  placeholder="09:00"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  errorMessage={errors.startTime?.message}
-                  containerStyle={[styles.inputContainer, styles.timeInput]}
-                  label="시작 시간"
-                />
+                <View style={styles.timeInput}>
+                  <Text style={styles.timeLabel}>시작 시간</Text>
+                  <TextInput
+                    placeholder="09:00"
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                    style={styles.input}
+                  />
+                  {errors.startTime && <Text style={styles.errorText}>{errors.startTime.message}</Text>}
+                </View>
               )}
             />
 
@@ -160,15 +164,17 @@ const ScheduleRegisterScreen: React.FC = () => {
               name="endTime"
               rules={{ required: '종료 시간을 입력해주세요' }}
               render={({ field: { onChange, onBlur, value } }) => (
-                <TextInput
-                  placeholder="18:00"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  errorMessage={errors.endTime?.message}
-                  containerStyle={[styles.inputContainer, styles.timeInput]}
-                  label="종료 시간"
-                />
+                <View style={styles.timeInput}>
+                  <Text style={styles.timeLabel}>종료 시간</Text>
+                  <TextInput
+                    placeholder="18:00"
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                    style={styles.input}
+                  />
+                  {errors.endTime && <Text style={styles.errorText}>{errors.endTime.message}</Text>}
+                </View>
               )}
             />
           </View>
@@ -184,7 +190,7 @@ const ScheduleRegisterScreen: React.FC = () => {
                 value={value}
                 multiline
                 numberOfLines={3}
-                containerStyle={styles.inputContainer}
+                style={[styles.input, styles.multilineInput]}
               />
             )}
           />
@@ -275,6 +281,17 @@ const styles = StyleSheet.create({
   },
   timeInput: {
     flex: 1,
+    marginHorizontal: THEME.spacing.sm,
+  },
+  timeLabel: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: COLORS.text,
+    marginBottom: THEME.spacing.sm,
+  },
+  multilineInput: {
+    height: 80,
+    textAlignVertical: 'top',
   },
   buttonContainer: {
     marginTop: THEME.spacing.xl,

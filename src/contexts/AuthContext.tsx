@@ -5,7 +5,7 @@ import { STORAGE_KEYS } from '../constants';
 import { useAuthStore } from '../stores';
 
 interface AuthContextType extends AuthState {
-  login: (user: User, token: string) => Promise<void>;
+  login: (user: User, token: string, refreshToken?: string) => Promise<void>;
   logout: () => Promise<void>;
   updateUser: (user: User) => void;
 }
