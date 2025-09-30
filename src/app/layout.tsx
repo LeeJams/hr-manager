@@ -3,7 +3,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'TechMeet HR Manager',
-  description: '현대적인 HR 관리 시스템',
+  description: '테크밋 SI 관리',
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
