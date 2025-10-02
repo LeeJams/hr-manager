@@ -1,9 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
-import BottomNav from '@/components/BottomNav'
-import MobileContainer from '@/components/MobileContainer'
+import MainLayout from '@/components/layout/MainLayout'
 
 export default function EmployeesPage() {
   const [searchQuery, setSearchQuery] = useState('')
@@ -17,17 +15,9 @@ export default function EmployeesPage() {
   ]
 
   return (
-    <MobileContainer>
-      <div className="min-h-screen bg-light pb-16">
-        {/* 헤더 */}
-        <header className="bg-dark text-light px-6 py-4">
-          <Link href="/home">
-            <h1 className="text-xl font-bold cursor-pointer">TechMeet</h1>
-          </Link>
-        </header>
-
-        {/* 검색 */}
-        <div className="p-6 bg-white border-b border-gray-200">
+    <MainLayout>
+      {/* 검색 */}
+      <div className="p-6 bg-white border-b border-gray-200">
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -83,11 +73,7 @@ export default function EmployeesPage() {
               </div>
             ))}
           </div>
-        </main>
-
-        {/* 하단 네비게이션 */}
-        <BottomNav />
-      </div>
-    </MobileContainer>
+      </main>
+    </MainLayout>
   )
 }

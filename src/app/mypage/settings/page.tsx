@@ -1,13 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import MobileContainer from '@/components/MobileContainer'
+import MainLayout from '@/components/layout/MainLayout'
 
 export default function SettingsPage() {
-  const router = useRouter()
-
   const [settings, setSettings] = useState({
     notifications: true,
     emailNotifications: false,
@@ -22,19 +19,8 @@ export default function SettingsPage() {
   }
 
   return (
-    <MobileContainer>
-      <div className="min-h-screen bg-light">
-        {/* 헤더 */}
-        <header className="bg-dark text-light px-6 py-4 flex items-center gap-4">
-          <button onClick={() => router.back()} className="p-1">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <h1 className="text-xl font-bold">설정</h1>
-        </header>
-
-        <div className="p-6 space-y-6">
+    <MainLayout showBackButton backHref="/mypage" headerTitle="설정" showBottomNav={false}>
+      <div className="p-6 space-y-6">
           {/* 알림 설정 */}
           <section className="bg-white rounded-xl shadow-sm border border-gray-200">
             <div className="p-5 border-b border-gray-100">
@@ -171,8 +157,7 @@ export default function SettingsPage() {
               </button>
             </div>
           </section>
-        </div>
       </div>
-    </MobileContainer>
+    </MainLayout>
   )
 }

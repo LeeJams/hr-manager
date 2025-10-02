@@ -1,9 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
-import BottomNav from '@/components/BottomNav'
-import MobileContainer from '@/components/MobileContainer'
+import MainLayout from '@/components/layout/MainLayout'
 
 export default function AttendancePage() {
   const [selectedDate, setSelectedDate] = useState('2025-09-30')
@@ -24,17 +22,9 @@ export default function AttendancePage() {
   ]
 
   return (
-    <MobileContainer>
-      <div className="min-h-screen bg-light pb-16">
-        {/* 헤더 */}
-        <header className="bg-dark text-light px-6 py-4">
-          <Link href="/home">
-            <h1 className="text-xl font-bold cursor-pointer">TechMeet</h1>
-          </Link>
-        </header>
-
-        {/* 날짜 선택 */}
-        <div className="p-6 bg-white border-b border-gray-200">
+    <MainLayout>
+      {/* 날짜 선택 */}
+      <div className="p-6 bg-white border-b border-gray-200">
           <div className="flex gap-2">
             <input
               type="date"
@@ -124,11 +114,7 @@ export default function AttendancePage() {
               </div>
             ))}
           </div>
-        </main>
-
-        {/* 하단 네비게이션 */}
-        <BottomNav />
-      </div>
-    </MobileContainer>
+      </main>
+    </MainLayout>
   )
 }

@@ -1,8 +1,6 @@
 'use client'
 
-import Link from 'next/link'
-import BottomNav from '@/components/BottomNav'
-import MobileContainer from '@/components/MobileContainer'
+import MainLayout from '@/components/layout/MainLayout'
 
 export default function DashboardPage() {
   const stats = [
@@ -20,17 +18,8 @@ export default function DashboardPage() {
   ]
 
   return (
-    <MobileContainer>
-      <div className="min-h-screen bg-light pb-16">
-        {/* 헤더 */}
-        <header className="bg-dark text-light px-6 py-4">
-          <Link href="/home">
-            <h1 className="text-xl font-bold cursor-pointer">TechMeet</h1>
-          </Link>
-        </header>
-
-        {/* 메인 컨텐츠 */}
-        <main className="p-6">
+    <MainLayout>
+      <main className="p-6">
           <div className="mb-6">
             <p className="text-gray-600">Techmeet HR 관리 시스템</p>
           </div>
@@ -107,11 +96,7 @@ export default function DashboardPage() {
               </div>
             </div>
           </div>
-        </main>
-
-        {/* 하단 네비게이션 */}
-        <BottomNav />
-      </div>
-    </MobileContainer>
+      </main>
+    </MainLayout>
   )
 }

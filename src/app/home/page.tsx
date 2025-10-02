@@ -9,6 +9,7 @@ import { UserStatus } from '@/types/user'
 import type { Project } from '@/types/project'
 import { ContractType, WorkType, ProjectStatus } from '@/types/project'
 import type { Notice } from '@/types/notice'
+import { NoticeType } from '@/types/notice'
 
 export default function HomePage() {
   // TODO: API 연동 후 실제 데이터로 교체
@@ -87,7 +88,7 @@ export default function HomePage() {
         id: '1',
         title: '2025년 상반기 워크샵 안내',
         content: '워크샵 내용...',
-        type: 'EVENT' as any,
+        type: NoticeType.EVENT,
         author: { id: '1', name: '관리자', role: '운영팀' },
         createdAt: '2025-01-15',
         views: 125,
@@ -97,7 +98,7 @@ export default function HomePage() {
         id: '2',
         title: '신규 복지 제도 시행 안내',
         content: '복지 내용...',
-        type: 'POLICY' as any,
+        type: NoticeType.POLICY,
         author: { id: '1', name: '관리자', role: '인사팀' },
         createdAt: '2025-01-10',
         views: 89,
@@ -107,7 +108,7 @@ export default function HomePage() {
         id: '3',
         title: '보안 정책 업데이트',
         content: '보안 내용...',
-        type: 'SYSTEM' as any,
+        type: NoticeType.SYSTEM,
         author: { id: '2', name: '시스템관리자', role: '보안팀' },
         createdAt: '2025-01-05',
         views: 203,

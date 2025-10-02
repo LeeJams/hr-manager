@@ -1,18 +1,15 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import Link from 'next/link'
-import MobileContainer from '@/components/MobileContainer'
+import MainLayout from '@/components/layout/MainLayout'
 import type { CareerProfile } from '@/types/career'
 import { EducationLevel, GraduationStatus } from '@/types/career'
 import { formatDate } from '@/lib/utils/career'
 
 export default function CareerViewPage() {
-  const router = useRouter()
-
   // TODO: API로부터 데이터 가져오기
-  const [profile, setProfile] = useState<CareerProfile>({
+  const [profile] = useState<CareerProfile>({
     personalInfo: {
       name: '김테크',
       gender: 'male',
@@ -103,27 +100,19 @@ export default function CareerViewPage() {
   }
 
   return (
-    <MobileContainer>
-      <div className="min-h-screen bg-light pb-6">
-        {/* 헤더 */}
-        <header className="bg-dark text-light px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <button onClick={() => router.back()} className="p-1">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            <h1 className="text-xl font-bold">이력 정보 조회</h1>
-          </div>
+    <MainLayout showBackButton backHref="/mypage" headerTitle="이력 정보 조회" showBottomNav={false}>
+      <div className="p-6 pb-6">
+        {/* 수정하기 버튼 */}
+        <div className="mb-6">
           <Link
             href="/mypage/career/manage"
-            className="px-4 py-2 bg-light text-dark text-sm font-medium rounded-lg hover:bg-opacity-90 transition-colors"
+            className="inline-block px-4 py-2 bg-dark text-light text-sm font-medium rounded-lg hover:bg-opacity-90 transition-colors"
           >
             수정하기
           </Link>
-        </header>
+        </div>
 
-        <div className="p-6 space-y-6">
+        <div className="space-y-6">
           {/* 개인정보 */}
           <section className="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
             <h2 className="text-lg font-semibold text-dark mb-4">개인정보</h2>
@@ -280,6 +269,6 @@ export default function CareerViewPage() {
           </section>
         </div>
       </div>
-    </MobileContainer>
+    </MainLayout>
   )
 }
