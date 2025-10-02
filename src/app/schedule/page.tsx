@@ -80,7 +80,7 @@ export default function SchedulePage() {
       <Calendar year={year} month={month} events={events} onMonthChange={handleMonthChange} />
 
       {/* 프로젝트 섹션 */}
-      <main className="px-6 py-8">
+      <main className="p-6">
         {isLoading ? (
           <div className="text-center py-12">
             <div className="inline-block w-8 h-8 border-4 border-gray-300 border-t-dark rounded-full animate-spin"></div>

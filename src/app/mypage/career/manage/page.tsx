@@ -161,8 +161,8 @@ export default function CareerManagePage() {
   }
 
   return (
-    <MainLayout showBackButton backHref="/mypage" headerTitle="이력 관리" showBottomNav={false}>
-      <div className="p-6 space-y-6">
+    <MainLayout showBackButton backHref="/mypage" headerTitle="이력 관리">
+      <main className="p-6 space-y-6">
           {/* 개인정보 */}
           <section className="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
             <div className="flex items-center justify-between mb-4">
@@ -381,7 +381,7 @@ export default function CareerManagePage() {
               ))}
             </div>
           </section>
-      </div>
+      </main>
     </MainLayout>
   )
 }

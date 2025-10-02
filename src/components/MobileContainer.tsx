@@ -10,7 +10,7 @@ export default function MobileContainer({ children, className = '' }: MobileCont
     <div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 flex justify-center">
       <div
         className={`
-          w-full max-w-[480px] md:max-w-[768px] lg:max-w-[1024px] xl:max-w-[1280px]
+          w-full max-w-[480px] md:max-w-[640px]
           bg-white min-h-screen
           shadow-xl
           relative ${className}

@@ -52,8 +52,9 @@ export default function AddCertificatePage() {
   }
 
   return (
-    <MainLayout showBackButton backHref="/mypage/career/manage" headerTitle="자격증 추가" showBottomNav={false}>
-      <form onSubmit={handleSubmit} className="p-6">
+    <MainLayout showBackButton backHref="/mypage/career/manage" headerTitle="자격증 추가">
+      <main className="p-6">
+        <form onSubmit={handleSubmit}>
           {/* 자격증명 */}
           <div className="mb-6">
             <label className="block text-sm font-medium text-dark mb-2">
@@ -140,6 +141,7 @@ export default function AddCertificatePage() {
             </button>
           </div>
         </form>
+      </main>
     </MainLayout>
   )
 }

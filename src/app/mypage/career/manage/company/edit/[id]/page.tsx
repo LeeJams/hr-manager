@@ -70,7 +70,7 @@ export default function EditCompanyCareerPage() {
 
   if (loading) {
     return (
-      <MainLayout showBackButton backHref="/mypage/career/manage" headerTitle="회사 경력 수정" showBottomNav={false}>
+      <MainLayout showBackButton backHref="/mypage/career/manage" headerTitle="회사 경력 수정">
         <div className="flex items-center justify-center py-20">
           <p className="text-gray-500">로딩 중...</p>
         </div>
@@ -79,8 +79,9 @@ export default function EditCompanyCareerPage() {
   }
 
   return (
-    <MainLayout showBackButton backHref="/mypage/career/manage" headerTitle="회사 경력 수정" showBottomNav={false}>
-      <form onSubmit={handleSubmit} className="p-6">
+    <MainLayout showBackButton backHref="/mypage/career/manage" headerTitle="회사 경력 수정">
+      <main className="p-6">
+        <form onSubmit={handleSubmit}>
           {/* 회사명 */}
           <div className="mb-6">
             <label className="block text-sm font-medium text-dark mb-2">
@@ -183,7 +184,8 @@ export default function EditCompanyCareerPage() {
               {isLoading ? '저장 중...' : '저장'}
             </button>
           </div>
-      </form>
+        </form>
+      </main>
     </MainLayout>
   )
 }

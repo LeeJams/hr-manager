@@ -19,8 +19,8 @@ export default function SettingsPage() {
   }
 
   return (
-    <MainLayout showBackButton backHref="/mypage" headerTitle="설정" showBottomNav={false}>
-      <div className="p-6 space-y-6">
+    <MainLayout showBackButton backHref="/mypage" headerTitle="설정">
+      <main className="p-6 space-y-6">
           {/* 알림 설정 */}
           <section className="bg-white rounded-xl shadow-sm border border-gray-200">
             <div className="p-5 border-b border-gray-100">
@@ -157,7 +157,7 @@ export default function SettingsPage() {
               </button>
             </div>
           </section>
-      </div>
+      </main>
     </MainLayout>
   )
 }

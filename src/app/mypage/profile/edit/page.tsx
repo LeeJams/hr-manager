@@ -45,8 +45,9 @@ export default function ProfileEditPage() {
   }
 
   return (
-    <MainLayout showBackButton backHref="/mypage" headerTitle="개인정보 수정" showBottomNav={false}>
-      <form onSubmit={handleSubmit} className="p-6">
+    <MainLayout showBackButton backHref="/mypage" headerTitle="개인정보 수정">
+      <main className="p-6">
+        <form onSubmit={handleSubmit}>
           {/* 이름 */}
           <div className="mb-6">
             <label className="block text-sm font-medium text-dark mb-2">이름</label>
@@ -153,7 +154,8 @@ export default function ProfileEditPage() {
               {isLoading ? '저장 중...' : '저장'}
             </button>
           </div>
-      </form>
+        </form>
+      </main>
     </MainLayout>
   )
 }

@@ -1,7 +1,11 @@
 import type { NextConfig } from 'next'
+import path from 'path'
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+
+  // Workspace root 명시적 설정
+  outputFileTracingRoot: path.join(__dirname),
 
   // 이미지 최적화
   images: {

@@ -45,8 +45,9 @@ export default function AddEducationPage() {
   }
 
   return (
-    <MainLayout showBackButton backHref="/mypage/career/manage" headerTitle="학력 추가" showBottomNav={false}>
-      <form onSubmit={handleSubmit} className="p-6">
+    <MainLayout showBackButton backHref="/mypage/career/manage" headerTitle="학력 추가">
+      <main className="p-6">
+        <form onSubmit={handleSubmit}>
           {/* 학력 구분 */}
           <div className="mb-6">
             <label className="block text-sm font-medium text-dark mb-2">
@@ -164,6 +165,7 @@ export default function AddEducationPage() {
             </button>
           </div>
         </form>
+      </main>
     </MainLayout>
   )
 }

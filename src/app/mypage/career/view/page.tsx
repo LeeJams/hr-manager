@@ -100,8 +100,8 @@ export default function CareerViewPage() {
   }
 
   return (
-    <MainLayout showBackButton backHref="/mypage" headerTitle="이력 정보 조회" showBottomNav={false}>
-      <div className="p-6 pb-6">
+    <MainLayout showBackButton backHref="/mypage" headerTitle="이력 정보 조회">
+      <main className="p-6">
         {/* 수정하기 버튼 */}
         <div className="mb-6">
           <Link
@@ -268,7 +268,7 @@ export default function CareerViewPage() {
             </div>
           </section>
         </div>
-      </div>
+      </main>
     </MainLayout>
   )
 }

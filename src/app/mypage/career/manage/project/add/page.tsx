@@ -68,8 +68,9 @@ export default function AddProjectCareerPage() {
   }
 
   return (
-    <MainLayout showBackButton backHref="/mypage/career/manage" headerTitle="프로젝트 경력 추가" showBottomNav={false}>
-      <form onSubmit={handleSubmit} className="p-6">
+    <MainLayout showBackButton backHref="/mypage/career/manage" headerTitle="프로젝트 경력 추가">
+      <main className="p-6">
+        <form onSubmit={handleSubmit}>
           {/* 프로젝트명 */}
           <div className="mb-6">
             <label className="block text-sm font-medium text-dark mb-2">
@@ -228,7 +229,8 @@ export default function AddProjectCareerPage() {
               {isLoading ? '저장 중...' : '저장'}
             </button>
           </div>
-      </form>
+        </form>
+      </main>
     </MainLayout>
   )
 }

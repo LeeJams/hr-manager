@@ -1,15 +1,15 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import {useEffect, useState} from 'react'
 import MainLayout from '@/components/layout/MainLayout'
 import UserStatusCard from '@/components/home/UserStatusCard'
 import ProjectSection from '@/components/home/ProjectSection'
 import NoticeSection from '@/components/home/NoticeSection'
-import { UserStatus } from '@/types/user'
-import type { Project } from '@/types/project'
-import { ContractType, WorkType, ProjectStatus } from '@/types/project'
-import type { Notice } from '@/types/notice'
-import { NoticeType } from '@/types/notice'
+import {UserStatus} from '@/types/user'
+import type {Project} from '@/types/project'
+import {ContractType, ProjectStatus, WorkType} from '@/types/project'
+import type {Notice} from '@/types/notice'
+import {NoticeType} from '@/types/notice'
 
 export default function HomePage() {
   // TODO: API 연동 후 실제 데이터로 교체
@@ -89,7 +89,7 @@ export default function HomePage() {
         title: '2025년 상반기 워크샵 안내',
         content: '워크샵 내용...',
         type: NoticeType.EVENT,
-        author: { id: '1', name: '관리자', role: '운영팀' },
+        author: {id: '1', name: '관리자', role: '운영팀'},
         createdAt: '2025-01-15',
         views: 125,
         isImportant: true,
@@ -99,7 +99,7 @@ export default function HomePage() {
         title: '신규 복지 제도 시행 안내',
         content: '복지 내용...',
         type: NoticeType.POLICY,
-        author: { id: '1', name: '관리자', role: '인사팀' },
+        author: {id: '1', name: '관리자', role: '인사팀'},
         createdAt: '2025-01-10',
         views: 89,
         isImportant: false,
@@ -109,7 +109,7 @@ export default function HomePage() {
         title: '보안 정책 업데이트',
         content: '보안 내용...',
         type: NoticeType.SYSTEM,
-        author: { id: '2', name: '시스템관리자', role: '보안팀' },
+        author: {id: '2', name: '시스템관리자', role: '보안팀'},
         createdAt: '2025-01-05',
         views: 203,
         isImportant: false,
@@ -122,7 +122,7 @@ export default function HomePage() {
 
   return (
     <MainLayout>
-      <main className="px-6 py-8">
+      <main className="p-6">
         {/* 인사말 */}
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-dark mb-2">
@@ -132,13 +132,13 @@ export default function HomePage() {
         </div>
 
         {/* 나의 상태 카드 */}
-        <UserStatusCard status={userStatus} career={career} />
+        <UserStatusCard status={userStatus} career={career}/>
 
         {/* 프로젝트 정보 섹션 */}
-        <ProjectSection projects={projects} />
+        <ProjectSection projects={projects}/>
 
         {/* 공지사항 섹션 */}
-        <NoticeSection notices={notices} />
+        <NoticeSection notices={notices}/>
       </main>
     </MainLayout>
   )

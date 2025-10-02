@@ -1,8 +1,9 @@
-import type { Metadata, Viewport } from 'next'
+import type {Metadata, Viewport} from 'next'
 import './globals.css'
+import React from "react";
 
 export const metadata: Metadata = {
-  title: 'TechMeet HR Manager',
+  title: 'TechMeet Project',
   description: '테크밋 SI 관리',
   manifest: '/manifest.json',
   appleWebApp: {
@@ -29,19 +30,15 @@ export const viewport: Viewport = {
 }
 
 export default function RootLayout({
-  children,
-}: {
+                                     children,
+                                   }: {
   children: React.ReactNode
 }) {
   return (
     <html lang="ko">
-      <head>
-        <link rel="apple-touch-icon" href="/icon-192.png" />
-        <meta name="mobile-web-app-capable" content="yes" />
-      </head>
-      <body className="antialiased">
-        {children}
-      </body>
+    <body className="antialiased">
+    {children}
+    </body>
     </html>
   )
 }

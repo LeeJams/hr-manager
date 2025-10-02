@@ -122,8 +122,9 @@ export default function MyPage() {
 
   return (
     <MainLayout>
-      {/* 내 정보 섹션 */}
-      <div className="bg-white border-b border-gray-200 p-6">
+      <main>
+        {/* 내 정보 섹션 */}
+        <div className="bg-white border-b border-gray-200 p-6">
           <h2 className="text-lg font-semibold text-dark mb-4">내 정보</h2>
 
           <div className="flex items-start gap-4 mb-4">
@@ -221,9 +222,9 @@ export default function MyPage() {
         )}
       </div>
 
-      {/* 메뉴 목록 */}
-      <main className="bg-white mb-2">
-        <div className="divide-y divide-gray-100">
+        {/* 메뉴 목록 */}
+        <div className="bg-white mb-2">
+          <div className="divide-y divide-gray-100">
             {menuItems.map((item, index) => (
               <Link
                 key={index}
@@ -240,17 +241,18 @@ export default function MyPage() {
               </Link>
             ))}
           </div>
-      </main>
+        </div>
 
-      {/* 로그아웃 버튼 */}
-      <div className="px-6 py-4">
+        {/* 로그아웃 버튼 */}
+        <div className="px-6 py-4">
         <button
           onClick={handleLogout}
           className="w-full py-3 border border-gray-300 rounded-lg text-dark hover:bg-gray-50 transition-colors"
         >
           로그아웃
         </button>
-      </div>
+        </div>
+      </main>
     </MainLayout>
   )
 }
