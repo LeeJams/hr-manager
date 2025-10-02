@@ -10,9 +10,9 @@ export default function MobileContainer({ children, className = '' }: MobileCont
     <div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 flex justify-center">
       <div
         className={`
-          w-full max-w-[480px] md:max-w-[768px]
+          w-full max-w-[480px] md:max-w-[768px] lg:max-w-[1024px] xl:max-w-[1280px]
           bg-white min-h-screen
-          shadow-xl rounded-md   /* 모서리 라운딩으로 더 부드럽게 */
+          shadow-xl
           relative ${className}
         `}
       >

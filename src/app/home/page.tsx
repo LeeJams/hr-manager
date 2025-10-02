@@ -1,14 +1,13 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Link from 'next/link'
-import BottomNav from '@/components/BottomNav'
-import MobileContainer from '@/components/MobileContainer'
+import MainLayout from '@/components/layout/MainLayout'
 import UserStatusCard from '@/components/home/UserStatusCard'
 import ProjectSection from '@/components/home/ProjectSection'
 import NoticeSection from '@/components/home/NoticeSection'
 import { UserStatus } from '@/types/user'
 import type { Project } from '@/types/project'
+import { ContractType, WorkType, ProjectStatus } from '@/types/project'
 import type { Notice } from '@/types/notice'
 
 export default function HomePage() {
@@ -33,46 +32,51 @@ export default function HomePage() {
     const mockProjects: Project[] = [
       {
         id: '1',
-        name: 'HR 관리 시스템 개선',
-        description: '차세대 HR 관리 시스템 개발 프로젝트',
-        status: 'IN_PROGRESS' as any,
-        progress: 65,
-        startDate: '2025-01-01',
-        endDate: '2025-06-30',
-        team: [
-          { id: '1', name: '김철수', role: '개발자' },
-          { id: '2', name: '박민수', role: '디자이너' },
-          { id: '3', name: '정수진', role: 'PM' },
-        ],
+        title: 'HR 관리 시스템 개선',
+        company: '테크밋',
+        overview: '차세대 HR 관리 시스템 개발 프로젝트',
+        detailedWork: 'Next.js 15 기반 모바일 최적화 HR 시스템 UI/UX 개발',
+        requiredSkills: ['Next.js', 'React', 'TypeScript'],
+        contractType: ContractType.FREELANCE,
+        workType: WorkType.REMOTE,
+        experienceLevel: '주니어~시니어, 2~10년 차',
+        positions: 2,
+        contractStartDate: '2025-01-01',
+        contractEndDate: '2025-06-30',
+        status: ProjectStatus.IN_PROGRESS,
         createdAt: '2025-01-01',
         updatedAt: '2025-01-15',
       },
       {
         id: '2',
-        name: '모바일 앱 개발',
-        description: 'iOS/Android 모바일 애플리케이션 개발',
-        status: 'IN_PROGRESS' as any,
-        progress: 40,
-        startDate: '2025-02-01',
-        endDate: '2025-08-31',
-        team: [
-          { id: '4', name: '이영희', role: '개발자' },
-          { id: '5', name: '최지훈', role: '개발자' },
-        ],
+        title: '모바일 앱 개발',
+        company: '테크솔루션',
+        overview: 'iOS/Android 모바일 애플리케이션 개발',
+        detailedWork: 'Flutter 기반 크로스플랫폼 모바일 앱 개발',
+        requiredSkills: ['Flutter', 'Dart', 'Firebase'],
+        contractType: ContractType.FREELANCE,
+        workType: WorkType.HYBRID,
+        experienceLevel: '시니어, 3년 차 이상',
+        positions: 1,
+        contractStartDate: '2025-02-01',
+        contractEndDate: '2025-08-31',
+        status: ProjectStatus.IN_PROGRESS,
         createdAt: '2025-02-01',
         updatedAt: '2025-02-15',
       },
       {
         id: '3',
-        name: 'API 서버 고도화',
-        description: '백엔드 API 성능 최적화 및 기능 확장',
-        status: 'PLANNING' as any,
-        progress: 20,
-        startDate: '2025-03-01',
-        endDate: '2025-05-31',
-        team: [
-          { id: '6', name: '김개발', role: '백엔드 개발자' },
-        ],
+        title: 'API 서버 고도화',
+        overview: '백엔드 API 성능 최적화 및 기능 확장',
+        detailedWork: 'Spring Boot 기반 RESTful API 개발, DB 설계',
+        requiredSkills: ['Spring Boot', 'Java', 'MySQL'],
+        contractType: ContractType.CONTRACT,
+        workType: WorkType.ONSITE,
+        experienceLevel: '시니어, 5년 차 이상',
+        positions: 1,
+        contractStartDate: '2025-03-01',
+        contractEndDate: '2025-05-31',
+        status: ProjectStatus.RECRUITING,
         createdAt: '2025-02-20',
         updatedAt: '2025-02-25',
       },
@@ -116,38 +120,25 @@ export default function HomePage() {
   }, [])
 
   return (
-    <MobileContainer>
-      <div className="min-h-screen bg-light pb-16">
-        {/* 헤더 */}
-        <header className="bg-dark text-light px-6 py-4">
-          <Link href="/home">
-            <h1 className="text-xl font-bold cursor-pointer">TechMeet</h1>
-          </Link>
-        </header>
+    <MainLayout>
+      <main className="px-6 py-8">
+        {/* 인사말 */}
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold text-dark mb-2">
+            안녕하세요 {userName}님,
+          </h2>
+          <p className="text-gray-600">오늘도 좋은 하루되세요</p>
+        </div>
 
-        {/* 메인 컨텐츠 */}
-        <main className="px-5 py-8">
-          {/* 인사말 */}
-          <div className="mb-8">
-            <h2 className="text-2xl font-bold text-dark mb-2">
-              안녕하세요 {userName}님,
-            </h2>
-            <p className="text-gray-600">오늘도 좋은 하루되세요</p>
-          </div>
+        {/* 나의 상태 카드 */}
+        <UserStatusCard status={userStatus} career={career} />
 
-          {/* 나의 상태 카드 */}
-          <UserStatusCard status={userStatus} career={career} />
+        {/* 프로젝트 정보 섹션 */}
+        <ProjectSection projects={projects} />
 
-          {/* 프로젝트 정보 섹션 */}
-          <ProjectSection projects={projects} />
-
-          {/* 공지사항 섹션 */}
-          <NoticeSection notices={notices} />
-        </main>
-
-        {/* 하단 네비게이션 */}
-        <BottomNav />
-      </div>
-    </MobileContainer>
+        {/* 공지사항 섹션 */}
+        <NoticeSection notices={notices} />
+      </main>
+    </MainLayout>
   )
 }

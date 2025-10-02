@@ -35,7 +35,7 @@ export default function ProjectSection({ projects }: ProjectSectionProps) {
             >
               <div className="flex items-start justify-between mb-2">
                 <h4 className="text-base font-semibold text-dark flex-1 pr-2">
-                  {project.name}
+                  {project.title}
                 </h4>
                 <span
                   className={`px-2 py-1 text-xs font-medium rounded-full whitespace-nowrap ${getProjectStatusColor(
@@ -47,53 +47,41 @@ export default function ProjectSection({ projects }: ProjectSectionProps) {
               </div>
 
               <p className="text-sm text-gray-600 mb-4 line-clamp-2">
-                {project.description}
+                {project.overview}
               </p>
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  {/* 팀원 아바타 */}
-                  <div className="flex -space-x-2">
-                    {project.team.slice(0, 3).map((member, idx) => (
-                      <div
+                  {/* 기술 스택 */}
+                  <div className="flex gap-1 flex-wrap">
+                    {project.requiredSkills.slice(0, 3).map((skill, idx) => (
+                      <span
                         key={idx}
-                        className="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center border-2 border-white"
-                        title={member.name}
+                        className="px-2 py-0.5 bg-blue-50 text-blue-700 text-xs rounded"
                       >
-                        <span className="text-[10px] text-dark font-medium">
-                          {member.name.charAt(0)}
-                        </span>
-                      </div>
+                        {skill}
+                      </span>
                     ))}
-                    {project.team.length > 3 && (
-                      <div className="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center border-2 border-white">
-                        <span className="text-[10px] text-dark font-medium">
-                          +{project.team.length - 3}
-                        </span>
-                      </div>
+                    {project.requiredSkills.length > 3 && (
+                      <span className="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded">
+                        +{project.requiredSkills.length - 3}
+                      </span>
                     )}
                   </div>
                 </div>
 
-                {/* 진행률 */}
-                <div className="flex items-center gap-2">
-                  <div className="w-20 bg-gray-200 rounded-full h-1.5">
-                    <div
-                      className="bg-dark h-1.5 rounded-full transition-all"
-                      style={{ width: `${project.progress}%` }}
-                    ></div>
-                  </div>
-                  <span className="text-xs text-gray-600 font-medium w-8 text-right">
-                    {project.progress}%
-                  </span>
+                {/* 모집 인원 */}
+                <div className="flex items-center gap-1">
+                  <span className="text-xs text-gray-600">모집</span>
+                  <span className="text-xs text-dark font-medium">{project.positions}명</span>
                 </div>
               </div>
 
               {/* 프로젝트 기간 */}
               <div className="mt-3 pt-3 border-t border-gray-100">
                 <span className="text-xs text-gray-500">
-                  {formatDate(project.startDate)}
-                  {project.endDate && ` ~ ${formatDate(project.endDate)}`}
+                  {project.contractStartDate && formatDate(project.contractStartDate)}
+                  {project.contractEndDate && ` ~ ${formatDate(project.contractEndDate)}`}
                 </span>
               </div>
             </Link>

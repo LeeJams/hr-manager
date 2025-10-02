@@ -15,66 +15,54 @@ export default function ProjectCard({ project, onApply }: ProjectCardProps) {
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
       <div className="flex items-start justify-between mb-3">
         <div className="flex-1">
-          <h3 className="text-base font-semibold text-dark mb-1">{project.name}</h3>
-          <p className="text-xs text-gray-500 line-clamp-2">{project.description}</p>
+          <h3 className="text-base font-semibold text-dark mb-1">{project.title}</h3>
+          <p className="text-xs text-gray-500 line-clamp-2">{project.overview}</p>
         </div>
         <span className={`${statusColor} text-white text-xs px-2 py-1 rounded-full ml-3 whitespace-nowrap`}>
           {formatProjectStatus(project.status)}
         </span>
       </div>
 
-      {/* 진행률 */}
+      {/* 기술 스택 */}
       <div className="mb-4">
-        <div className="flex justify-between items-center mb-1">
-          <span className="text-xs text-gray-600">진행률</span>
-          <span className="text-xs font-medium text-dark">{project.progress}%</span>
-        </div>
-        <div className="w-full bg-gray-200 rounded-full h-1.5">
-          <div className="bg-dark h-1.5 rounded-full transition-all" style={{ width: `${project.progress}%` }} />
+        <div className="flex flex-wrap gap-1">
+          {project.requiredSkills.slice(0, 5).map((skill, idx) => (
+            <span key={idx} className="px-2 py-0.5 bg-blue-50 text-blue-700 text-xs rounded">
+              {skill}
+            </span>
+          ))}
+          {project.requiredSkills.length > 5 && (
+            <span className="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded">
+              +{project.requiredSkills.length - 5}
+            </span>
+          )}
         </div>
       </div>
 
       {/* 날짜 정보 */}
       <div className="mb-4 space-y-1">
         <div className="flex justify-between text-xs">
-          <span className="text-gray-500">시작일</span>
-          <span className="text-dark">{project.startDate}</span>
+          <span className="text-gray-500">계약 시작</span>
+          <span className="text-dark">{project.contractStartDate}</span>
         </div>
-        {project.endDate && (
+        {project.contractEndDate && (
           <div className="flex justify-between text-xs">
-            <span className="text-gray-500">종료일</span>
-            <span className="text-dark">{project.endDate}</span>
+            <span className="text-gray-500">계약 종료</span>
+            <span className="text-dark">{project.contractEndDate}</span>
           </div>
         )}
-        {project.applicationEndDate && (
+        {project.applicationDeadline && (
           <div className="flex justify-between text-xs">
             <span className="text-gray-500">지원 마감</span>
-            <span className="text-orange-600 font-medium">{project.applicationEndDate}</span>
+            <span className="text-orange-600 font-medium">{project.applicationDeadline}</span>
           </div>
         )}
       </div>
 
-      {/* 팀 멤버 */}
+      {/* 모집 인원 및 지원 버튼 */}
       <div className="flex items-center justify-between">
-        <div className="flex -space-x-2">
-          {project.team.slice(0, 4).map((member) => (
-            <div
-              key={member.id}
-              className="w-7 h-7 rounded-full bg-gray-300 border-2 border-white flex items-center justify-center"
-              title={member.name}
-            >
-              {member.avatar ? (
-                <img src={member.avatar} alt={member.name} className="w-full h-full rounded-full object-cover" />
-              ) : (
-                <span className="text-xs text-gray-600">{member.name[0]}</span>
-              )}
-            </div>
-          ))}
-          {project.team.length > 4 && (
-            <div className="w-7 h-7 rounded-full bg-gray-200 border-2 border-white flex items-center justify-center">
-              <span className="text-xs text-gray-600">+{project.team.length - 4}</span>
-            </div>
-          )}
+        <div className="text-xs text-gray-600">
+          모집 인원: <span className="text-dark font-medium">{project.positions}명</span>
         </div>
 
         {/* 지원하기 버튼 (추천 프로젝트용) */}

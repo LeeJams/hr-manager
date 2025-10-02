@@ -1,9 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Link from 'next/link'
-import BottomNav from '@/components/BottomNav'
-import MobileContainer from '@/components/MobileContainer'
+import MainLayout from '@/components/layout/MainLayout'
 import Calendar from '@/components/schedule/Calendar'
 import ExpandableProjectSection from '@/components/schedule/ExpandableProjectSection'
 import type { CalendarEvent } from '@/types/schedule'
@@ -77,46 +75,34 @@ export default function SchedulePage() {
   }
 
   return (
-    <MobileContainer>
-      <div className="min-h-screen bg-light pb-16">
-        {/* 헤더 */}
-        <header className="bg-dark text-light px-6 py-4">
-          <Link href="/home">
-            <h1 className="text-xl font-bold cursor-pointer">TechMeet</h1>
-          </Link>
-        </header>
+    <MainLayout>
+      {/* 캘린더 */}
+      <Calendar year={year} month={month} events={events} onMonthChange={handleMonthChange} />
 
-        {/* 캘린더 */}
-        <Calendar year={year} month={month} events={events} onMonthChange={handleMonthChange} />
+      {/* 프로젝트 섹션 */}
+      <main className="px-6 py-8">
+        {isLoading ? (
+          <div className="text-center py-12">
+            <div className="inline-block w-8 h-8 border-4 border-gray-300 border-t-dark rounded-full animate-spin"></div>
+            <p className="text-sm text-gray-500 mt-4">로딩 중...</p>
+          </div>
+        ) : (
+          <>
+            {/* 관리자 요청 프로젝트 */}
+            <ExpandableProjectSection title="관리자 요청 프로젝트" projects={requestedProjects} />
 
-        {/* 프로젝트 섹션 */}
-        <main className="px-5 py-8">
-          {isLoading ? (
-            <div className="text-center py-12">
-              <div className="inline-block w-8 h-8 border-4 border-gray-300 border-t-dark rounded-full animate-spin"></div>
-              <p className="text-sm text-gray-500 mt-4">로딩 중...</p>
-            </div>
-          ) : (
-            <>
-              {/* 관리자 요청 프로젝트 */}
-              <ExpandableProjectSection title="관리자 요청 프로젝트" projects={requestedProjects} />
+            {/* 내가 신청한 프로젝트 */}
+            <ExpandableProjectSection title="내가 신청한 프로젝트" projects={myApplications} />
 
-              {/* 내가 신청한 프로젝트 */}
-              <ExpandableProjectSection title="내가 신청한 프로젝트" projects={myApplications} />
-
-              {/* 추천 프로젝트 */}
-              <ExpandableProjectSection
-                title="추천 프로젝트"
-                projects={recommendedProjects}
-                onApply={handleApply}
-              />
-            </>
-          )}
-        </main>
-
-        {/* 하단 네비게이션 */}
-        <BottomNav />
-      </div>
-    </MobileContainer>
+            {/* 추천 프로젝트 */}
+            <ExpandableProjectSection
+              title="추천 프로젝트"
+              projects={recommendedProjects}
+              onApply={handleApply}
+            />
+          </>
+        )}
+      </main>
+    </MainLayout>
   )
 }

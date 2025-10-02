@@ -2,8 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import Link from 'next/link'
-import MobileContainer from '@/components/MobileContainer'
+import MainLayout from '@/components/layout/MainLayout'
 
 export default function ProfileEditPage() {
   const router = useRouter()
@@ -46,19 +45,8 @@ export default function ProfileEditPage() {
   }
 
   return (
-    <MobileContainer>
-      <div className="min-h-screen bg-light">
-        {/* 헤더 */}
-        <header className="bg-dark text-light px-6 py-4 flex items-center gap-4">
-          <button onClick={() => router.back()} className="p-1">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <h1 className="text-xl font-bold">개인정보 수정</h1>
-        </header>
-
-        <form onSubmit={handleSubmit} className="p-6">
+    <MainLayout showBackButton backHref="/mypage" headerTitle="개인정보 수정" showBottomNav={false}>
+      <form onSubmit={handleSubmit} className="p-6">
           {/* 이름 */}
           <div className="mb-6">
             <label className="block text-sm font-medium text-dark mb-2">이름</label>
@@ -165,8 +153,7 @@ export default function ProfileEditPage() {
               {isLoading ? '저장 중...' : '저장'}
             </button>
           </div>
-        </form>
-      </div>
-    </MobileContainer>
+      </form>
+    </MainLayout>
   )
 }

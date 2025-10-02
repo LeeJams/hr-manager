@@ -81,9 +81,9 @@ export const getUserStatusColor = (status: UserStatus): string => {
  */
 export const formatProjectStatus = (status: ProjectStatus): string => {
   const statusMap: Record<ProjectStatus, string> = {
-    [ProjectStatus.PLANNING]: '기획 중',
+    [ProjectStatus.RECRUITING]: '모집 중',
+    [ProjectStatus.CLOSED]: '모집 마감',
     [ProjectStatus.IN_PROGRESS]: '진행 중',
-    [ProjectStatus.ON_HOLD]: '보류',
     [ProjectStatus.COMPLETED]: '완료',
     [ProjectStatus.CANCELLED]: '취소',
   }
@@ -96,10 +96,10 @@ export const formatProjectStatus = (status: ProjectStatus): string => {
  */
 export const getProjectStatusColor = (status: ProjectStatus): string => {
   const colorMap: Record<ProjectStatus, string> = {
-    [ProjectStatus.PLANNING]: 'bg-yellow-100 text-yellow-800',
+    [ProjectStatus.RECRUITING]: 'bg-green-100 text-green-800',
+    [ProjectStatus.CLOSED]: 'bg-orange-100 text-orange-800',
     [ProjectStatus.IN_PROGRESS]: 'bg-blue-100 text-blue-800',
-    [ProjectStatus.ON_HOLD]: 'bg-orange-100 text-orange-800',
-    [ProjectStatus.COMPLETED]: 'bg-green-100 text-green-800',
+    [ProjectStatus.COMPLETED]: 'bg-gray-100 text-gray-800',
     [ProjectStatus.CANCELLED]: 'bg-red-100 text-red-800',
   }
 

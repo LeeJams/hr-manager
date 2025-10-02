@@ -3,8 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import BottomNav from '@/components/BottomNav'
-import MobileContainer from '@/components/MobileContainer'
+import MainLayout from '@/components/layout/MainLayout'
 import { UserStatus } from '@/types/user'
 import type { MyPageProfile } from '@/types/mypage'
 import { formatCareerInfo, formatUserStatus, getUserStatusColor } from '@/lib/utils/career'
@@ -87,6 +86,20 @@ export default function MyPage() {
       ),
     },
     {
+      title: '공지사항',
+      href: '/notices',
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+          />
+        </svg>
+      ),
+    },
+    {
       title: '설정',
       href: '/mypage/settings',
       icon: (
@@ -108,17 +121,9 @@ export default function MyPage() {
   const careerText = formatCareerInfo(profile.totalCareer)
 
   return (
-    <MobileContainer>
-      <div className="min-h-screen bg-light pb-16">
-        {/* 헤더 */}
-        <header className="bg-dark text-light px-6 py-4">
-          <Link href="/home">
-            <h1 className="text-xl font-bold cursor-pointer">TechMeet</h1>
-          </Link>
-        </header>
-
-        {/* 내 정보 섹션 */}
-        <div className="bg-white border-b border-gray-200 p-6">
+    <MainLayout>
+      {/* 내 정보 섹션 */}
+      <div className="bg-white border-b border-gray-200 p-6">
           <h2 className="text-lg font-semibold text-dark mb-4">내 정보</h2>
 
           <div className="flex items-start gap-4 mb-4">
@@ -172,53 +177,53 @@ export default function MyPage() {
                   +{profile.skills.length - 6}
                 </span>
               )}
-            </div>
           </div>
         </div>
+      </div>
 
-        {/* 현재 프로젝트 정보 */}
-        <div className="bg-white p-6 mb-2">
-          <h3 className="text-base font-semibold text-dark mb-3">현재 프로젝트</h3>
-          {profile.currentProject ? (
-            <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-              <div className="flex items-start justify-between mb-2">
-                <h4 className="text-sm font-semibold text-dark">{profile.currentProject.name}</h4>
-                <span className="px-2 py-0.5 bg-green-100 text-green-700 text-xs font-medium rounded-full">
-                  투입 중
-                </span>
-              </div>
-              <p className="text-xs text-gray-600 mb-1">
-                {profile.currentProject.clientName && `${profile.currentProject.clientName} · `}
-                {profile.currentProject.role}
-              </p>
-              <p className="text-xs text-gray-500">
-                {profile.currentProject.startDate} ~ {profile.currentProject.endDate || '진행중'}
-              </p>
+      {/* 현재 프로젝트 정보 */}
+      <div className="bg-white p-6 mb-2">
+        <h3 className="text-base font-semibold text-dark mb-3">현재 프로젝트</h3>
+        {profile.currentProject ? (
+          <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+            <div className="flex items-start justify-between mb-2">
+              <h4 className="text-sm font-semibold text-dark">{profile.currentProject.name}</h4>
+              <span className="px-2 py-0.5 bg-green-100 text-green-700 text-xs font-medium rounded-full">
+                투입 중
+              </span>
             </div>
-          ) : profile.appliedProjects && profile.appliedProjects.length > 0 ? (
-            <div className="space-y-2">
-              {profile.appliedProjects.map((project) => (
-                <div key={project.id} className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                  <div className="flex items-start justify-between mb-2">
-                    <h4 className="text-sm font-semibold text-dark">{project.name}</h4>
-                    <span className="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs font-medium rounded-full">
-                      지원함
-                    </span>
-                  </div>
-                  <p className="text-xs text-gray-600">{project.role}</p>
+            <p className="text-xs text-gray-600 mb-1">
+              {profile.currentProject.clientName && `${profile.currentProject.clientName} · `}
+              {profile.currentProject.role}
+            </p>
+            <p className="text-xs text-gray-500">
+              {profile.currentProject.startDate} ~ {profile.currentProject.endDate || '진행중'}
+            </p>
+          </div>
+        ) : profile.appliedProjects && profile.appliedProjects.length > 0 ? (
+          <div className="space-y-2">
+            {profile.appliedProjects.map((project) => (
+              <div key={project.id} className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                <div className="flex items-start justify-between mb-2">
+                  <h4 className="text-sm font-semibold text-dark">{project.name}</h4>
+                  <span className="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs font-medium rounded-full">
+                    지원함
+                  </span>
                 </div>
-              ))}
-            </div>
-          ) : (
-            <div className="bg-gray-50 rounded-lg p-6 text-center border border-gray-200">
-              <p className="text-sm text-gray-500">투입 중인 프로젝트가 없습니다</p>
-            </div>
-          )}
-        </div>
+                <p className="text-xs text-gray-600">{project.role}</p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="bg-gray-50 rounded-lg p-6 text-center border border-gray-200">
+            <p className="text-sm text-gray-500">투입 중인 프로젝트가 없습니다</p>
+          </div>
+        )}
+      </div>
 
-        {/* 메뉴 목록 */}
-        <main className="bg-white mb-2">
-          <div className="divide-y divide-gray-100">
+      {/* 메뉴 목록 */}
+      <main className="bg-white mb-2">
+        <div className="divide-y divide-gray-100">
             {menuItems.map((item, index) => (
               <Link
                 key={index}
@@ -235,21 +240,17 @@ export default function MyPage() {
               </Link>
             ))}
           </div>
-        </main>
+      </main>
 
-        {/* 로그아웃 버튼 */}
-        <div className="px-6 py-4">
-          <button
-            onClick={handleLogout}
-            className="w-full py-3 border border-gray-300 rounded-lg text-dark hover:bg-gray-50 transition-colors"
-          >
-            로그아웃
-          </button>
-        </div>
-
-        {/* 하단 네비게이션 */}
-        <BottomNav />
+      {/* 로그아웃 버튼 */}
+      <div className="px-6 py-4">
+        <button
+          onClick={handleLogout}
+          className="w-full py-3 border border-gray-300 rounded-lg text-dark hover:bg-gray-50 transition-colors"
+        >
+          로그아웃
+        </button>
       </div>
-    </MobileContainer>
+    </MainLayout>
   )
 }

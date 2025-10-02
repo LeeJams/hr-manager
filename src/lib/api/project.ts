@@ -40,13 +40,33 @@ export const getProjectById = async (projectId: string): Promise<Project> => {
   }
 }
 
-// 내 프로젝트 목록 조회
-export const getMyProjects = async (): Promise<Project[]> => {
+// 내가 지원한 프로젝트 목록 조회
+export const getMyAppliedProjects = async (): Promise<Project[]> => {
   try {
-    const response = await axios.get<ProjectListResponse>(`${API_BASE_URL}/projects/my`)
+    const response = await axios.get<ProjectListResponse>(`${API_BASE_URL}/projects/applied`)
     return response.data.projects
   } catch (error) {
-    console.error('Get my projects error:', error)
+    console.error('Get my applied projects error:', error)
+    throw error
+  }
+}
+
+// 프로젝트 지원하기
+export const applyToProject = async (projectId: string): Promise<void> => {
+  try {
+    await axios.post(`${API_BASE_URL}/projects/${projectId}/apply`)
+  } catch (error) {
+    console.error('Apply to project error:', error)
+    throw error
+  }
+}
+
+// 프로젝트 지원 취소
+export const cancelProjectApplication = async (projectId: string): Promise<void> => {
+  try {
+    await axios.delete(`${API_BASE_URL}/projects/${projectId}/apply`)
+  } catch (error) {
+    console.error('Cancel project application error:', error)
     throw error
   }
 }
