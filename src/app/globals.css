@@ -45,8 +45,7 @@ body {
 /* 터치 친화적 버튼 */
 button,
 a {
-    min-height: 44px;
-    min-width: 44px;
+    min-width: 20px;
     touch-action: manipulation;
 }
 

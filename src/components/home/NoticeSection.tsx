@@ -1,11 +1,15 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import type { Notice } from '@/types/notice'
-import { formatRelativeTime, formatNoticeType, getNoticeTypeColor } from '@/lib/utils/career'
+import Link from "next/link";
+import type { Notice } from "@/types/notice";
+import {
+  formatRelativeTime,
+  formatNoticeType,
+  getNoticeTypeColor,
+} from "@/lib/utils/career";
 
 interface NoticeSectionProps {
-  notices: Notice[]
+  notices: Notice[];
 }
 
 export default function NoticeSection({ notices }: NoticeSectionProps) {
@@ -94,5 +98,5 @@ export default function NoticeSection({ notices }: NoticeSectionProps) {
         </div>
       )}
     </div>
-  )
+  );
 }
