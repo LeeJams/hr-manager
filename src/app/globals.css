@@ -16,7 +16,8 @@
     -webkit-tap-highlight-color: transparent;
 }
 
-html, body {
+html,
+body {
     height: 100%;
     overflow-x: hidden;
 }
@@ -27,6 +28,7 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scrollbar-width: none;
 }
 
 /* Safe area 처리 (노치 대응) */
@@ -41,7 +43,8 @@ body {
 }
 
 /* 터치 친화적 버튼 */
-button, a {
+button,
+a {
     min-height: 44px;
     min-width: 44px;
     touch-action: manipulation;
@@ -58,7 +61,8 @@ button, a {
         font-size: 14px;
     }
 
-    button, a {
+    button,
+    a {
         min-height: 40px;
         min-width: 40px;
     }
